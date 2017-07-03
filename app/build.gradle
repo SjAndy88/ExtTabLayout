@@ -38,11 +38,6 @@ dependencies {
     compile "me.yokeyword:fragmentation:$rootProject.fragmentationVersion"
     compile "me.yokeyword:fragmentation-swipeback:$rootProject.fragmentationVersion"
 
-    /** Stetho **/
-    // https://github.com/facebook/stetho
-    compile "com.facebook.stetho:stetho:$rootProject.stethoVersion"
-    compile "com.facebook.stetho:stetho-okhttp3:$rootProject.stethoVersion"
-
     /** Butter Knife **/
     // https://github.com/JakeWharton/butterknife
     compile "com.jakewharton:butterknife:$rootProject.butterknifeVersion"
