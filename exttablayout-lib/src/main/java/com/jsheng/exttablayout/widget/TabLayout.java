@@ -311,6 +311,9 @@ public class TabLayout extends HorizontalScrollView {
 
         mTabStrip.setSelectedIndicatorHeight(
                 a.getDimensionPixelSize(R.styleable.TabLayout_tabIndicatorHeight, 0));
+        boolean tabIndicatorWidthoutPadding =
+                a.getBoolean(R.styleable.TabLayout_tabIndicatorWidthWithoutPadding, false);
+        mTabStrip.setSelectedIndicatorWidthoutPadding(tabIndicatorWidthoutPadding);
         mTabStrip.setSelectedIndicatorWidth(
                 a.getDimensionPixelSize(R.styleable.TabLayout_tabIndicatorWidth, 0));
         mTabStrip.setSelectedIndicatorColor(a.getColor(R.styleable.TabLayout_tabIndicatorColor, 0));
@@ -1832,6 +1835,8 @@ public class TabLayout extends HorizontalScrollView {
 
         private ValueAnimatorCompat mIndicatorAnimator;
 
+        private boolean mSelectedIndicatorWidthoutPadding;
+
         SlidingTabStrip(Context context) {
             super(context);
             setWillNotDraw(false);
@@ -1850,6 +1855,10 @@ public class TabLayout extends HorizontalScrollView {
                 mSelectedIndicatorHeight = height;
                 ViewCompat.postInvalidateOnAnimation(this);
             }
+        }
+
+        public void setSelectedIndicatorWidthoutPadding(boolean without) {
+            mSelectedIndicatorWidthoutPadding = without;
         }
 
         void setSelectedIndicatorWidth(int width) {
@@ -1957,20 +1966,30 @@ public class TabLayout extends HorizontalScrollView {
             }
         }
 
+        private int getRealLeft(View view) {
+            int paddingLeft = mSelectedIndicatorWidthoutPadding ? view.getPaddingLeft() : 0;
+            return view.getLeft() + paddingLeft;
+        }
+
+        private int getRealRight(View view) {
+            int paddingRight = mSelectedIndicatorWidthoutPadding ? view.getPaddingRight() : 0;
+            return view.getRight() - paddingRight;
+        }
+
         private void updateIndicatorPosition() {
             final View selectedTitle = getChildAt(mSelectedPosition);
             int left, right;
 
             if (selectedTitle != null && selectedTitle.getWidth() > 0) {
-                left = selectedTitle.getLeft();
-                right = selectedTitle.getRight();
+                left = getRealLeft(selectedTitle);
+                right = getRealRight(selectedTitle);
 
                 if (mSelectionOffset > 0f && mSelectedPosition < getChildCount() - 1) {
                     // Draw the selection partway between the tabs
                     View nextTitle = getChildAt(mSelectedPosition + 1);
-                    left = (int) (mSelectionOffset * nextTitle.getLeft() +
+                    left = (int) (mSelectionOffset * getRealLeft(nextTitle) +
                             (1.0f - mSelectionOffset) * left);
-                    right = (int) (mSelectionOffset * nextTitle.getRight() +
+                    right = (int) (mSelectionOffset * getRealRight(nextTitle) +
                             (1.0f - mSelectionOffset) * right);
                 }
             } else {
@@ -1985,6 +2004,13 @@ public class TabLayout extends HorizontalScrollView {
                 // If the indicator's left/right has changed, invalidate
                 mIndicatorLeft = left;
                 mIndicatorRight = right;
+
+                int offset = mSelectedIndicatorWidth == 0 ?
+                        0 : (mIndicatorRight - mIndicatorLeft - mSelectedIndicatorWidth) / 2;
+                if (offset != 0) {
+                    mIndicatorLeft += offset;
+                    mIndicatorRight -= offset;
+                }
                 ViewCompat.postInvalidateOnAnimation(this);
             }
         }
@@ -2004,8 +2030,8 @@ public class TabLayout extends HorizontalScrollView {
                 return;
             }
 
-            final int targetLeft = targetView.getLeft();
-            final int targetRight = targetView.getRight();
+            final int targetLeft = getRealLeft(targetView);
+            final int targetRight = getRealRight(targetView);
             final int startLeft;
             final int startRight;
 
@@ -2064,13 +2090,8 @@ public class TabLayout extends HorizontalScrollView {
 
             // Thick colored underline below the current selection
             if (mIndicatorLeft >= 0 && mIndicatorRight > mIndicatorLeft) {
-                // 加入这段代码是为了自定义Indicator的宽度
-                int offset = 0;
-                if (mSelectedIndicatorWidth != 0) {
-                    offset = (mIndicatorRight - mIndicatorLeft - mSelectedIndicatorWidth) / 2;
-                }
-                canvas.drawRect(mIndicatorLeft + offset, getHeight() - mSelectedIndicatorHeight,
-                        mIndicatorRight - offset, getHeight(), mSelectedIndicatorPaint);
+                canvas.drawRect(mIndicatorLeft, getHeight() - mSelectedIndicatorHeight,
+                        mIndicatorRight, getHeight(), mSelectedIndicatorPaint);
             }
         }
     }

@@ -4,13 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.jsheng.exttablayout.sample.MainActivity">
+    tools:context="com.jsheng.exttablayout.sample.MainActivity"
+    android:gravity="center">
 
-    <include layout="@layout/toolbar_main" />
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Custom Width"
+        android:textAllCaps="false"
+        tools:layout_editor_absoluteX="135dp"
+        tools:layout_editor_absoluteY="201dp" />
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/home_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Without Padding"
+        android:textAllCaps="false"
+        tools:layout_editor_absoluteX="127dp"
+        tools:layout_editor_absoluteY="301dp" />
 </LinearLayout>

@@ -21,6 +21,8 @@
         <attr name="tabIndicatorColor" format="color"/>
         <!-- Height of the indicator used to show the currently selected tab. -->
         <attr name="tabIndicatorHeight" format="dimension"/>
+        <!-- Width of the indicator used to show the currently selected tab without padding of content -->
+        <attr name="tabIndicatorWidthWithoutPadding" format="boolean"/>
         <!-- Width of the indicator used to show the currently selected tab. -->
         <attr name="tabIndicatorWidth" format="dimension"/>
         <!-- Position in the Y axis from the starting edge that tabs should be positioned from. -->
