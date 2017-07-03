@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">ExtTabLayoutSample</string>
+
+    <string name="home_tab_ask">问吧</string>
+    <string name="home_tab_event">时事</string>
+    <string name="home_tab_finance">财经</string>
+    <string name="home_tab_live">生活</string>
+    <string name="home_tab_recommend">推荐</string>
+    <string name="home_tab_thought">思想</string>
+    <string name="home_tab_video">视频</string>
+    <string name="home_tab_pastime">娱乐</string>
+    <string name="home_tab_military">军事</string>
+
+</resources>
