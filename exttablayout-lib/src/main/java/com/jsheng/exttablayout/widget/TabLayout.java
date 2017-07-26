@@ -311,9 +311,9 @@ public class TabLayout extends HorizontalScrollView {
 
         mTabStrip.setSelectedIndicatorHeight(
                 a.getDimensionPixelSize(R.styleable.TabLayout_tabIndicatorHeight, 0));
-        boolean tabIndicatorWidthoutPadding =
+        boolean tabIndicatorWidthWithoutPadding =
                 a.getBoolean(R.styleable.TabLayout_tabIndicatorWidthWithoutPadding, false);
-        mTabStrip.setSelectedIndicatorWidthoutPadding(tabIndicatorWidthoutPadding);
+        mTabStrip.setSelectedIndicatorWidthOutPadding(tabIndicatorWidthWithoutPadding);
         mTabStrip.setSelectedIndicatorWidth(
                 a.getDimensionPixelSize(R.styleable.TabLayout_tabIndicatorWidth, 0));
         mTabStrip.setSelectedIndicatorColor(a.getColor(R.styleable.TabLayout_tabIndicatorColor, 0));
@@ -1835,7 +1835,7 @@ public class TabLayout extends HorizontalScrollView {
 
         private ValueAnimatorCompat mIndicatorAnimator;
 
-        private boolean mSelectedIndicatorWidthoutPadding;
+        private boolean mSelectedIndicatorWidthWithoutPadding;
 
         SlidingTabStrip(Context context) {
             super(context);
@@ -1857,8 +1857,8 @@ public class TabLayout extends HorizontalScrollView {
             }
         }
 
-        public void setSelectedIndicatorWidthoutPadding(boolean without) {
-            mSelectedIndicatorWidthoutPadding = without;
+        public void setSelectedIndicatorWidthOutPadding(boolean without) {
+            mSelectedIndicatorWidthWithoutPadding = without;
         }
 
         void setSelectedIndicatorWidth(int width) {
@@ -1967,12 +1967,12 @@ public class TabLayout extends HorizontalScrollView {
         }
 
         private int getRealLeft(View view) {
-            int paddingLeft = mSelectedIndicatorWidthoutPadding ? view.getPaddingLeft() : 0;
+            int paddingLeft = mSelectedIndicatorWidthWithoutPadding ? view.getPaddingLeft() : 0;
             return view.getLeft() + paddingLeft;
         }
 
         private int getRealRight(View view) {
-            int paddingRight = mSelectedIndicatorWidthoutPadding ? view.getPaddingRight() : 0;
+            int paddingRight = mSelectedIndicatorWidthWithoutPadding ? view.getPaddingRight() : 0;
             return view.getRight() - paddingRight;
         }
 
