@@ -912,13 +912,19 @@ public class TabLayout extends HorizontalScrollView {
                 addTab(newTab().setText(mPagerAdapter.getPageTitle(i)), false);
             }
 
-            // Make sure we reflect the currently set ViewPager item
-            if (mViewPager != null && adapterCount > 0) {
-                final int curItem = mViewPager.getCurrentItem();
-                if (curItem != getSelectedTabPosition() && curItem < getTabCount()) {
-                    selectTab(getTabAt(curItem));
+            // need to post run, to fix issue that not layout children view
+            post(new Runnable() {
+                @Override
+                public void run() {
+                    // Make sure we reflect the currently set ViewPager item
+                    if (mViewPager != null && adapterCount > 0) {
+                        final int curItem = mViewPager.getCurrentItem();
+                        if (curItem != getSelectedTabPosition() && curItem < getTabCount()) {
+                            selectTab(getTabAt(curItem));
+                        }
+                    }
                 }
-            }
+            });
         }
     }
 
