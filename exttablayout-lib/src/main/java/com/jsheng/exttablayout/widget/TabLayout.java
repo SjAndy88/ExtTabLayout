@@ -255,6 +255,8 @@ public class TabLayout extends HorizontalScrollView {
     int mTabTextAppearance;
     ColorStateList mTabTextColors;
     float mTabTextSize;
+    float mTabSelectTextSize;
+
     float mTabTextMultiLineSize;
 
     final int mTabBackgroundResId;
@@ -343,6 +345,8 @@ public class TabLayout extends HorizontalScrollView {
         } finally {
             ta.recycle();
         }
+
+        mTabSelectTextSize = a.getDimensionPixelSize(R.styleable.TabLayout_tabSelectedTextSize, (int) mTabTextSize);
 
         if (a.hasValue(R.styleable.TabLayout_tabTextColor)) {
             // If we have an explicit text color set, use it instead
@@ -1564,6 +1568,7 @@ public class TabLayout extends HorizontalScrollView {
             // changed
             if (mTextView != null) {
                 mTextView.setSelected(selected);
+                mTextView.setTextSize(selected ? mTabSelectTextSize : mTabTextSize);
             }
             if (mIconView != null) {
                 mIconView.setSelected(selected);
@@ -1614,7 +1619,7 @@ public class TabLayout extends HorizontalScrollView {
             // We need to switch the text size based on whether the text is spanning 2 lines or not
             if (mTextView != null) {
                 final Resources res = getResources();
-                float textSize = mTabTextSize;
+                float textSize = mTextView.isSelected() ? mTabSelectTextSize : mTabTextSize;
                 int maxLines = mDefaultMaxLines;
 
                 if (mIconView != null && mIconView.getVisibility() == VISIBLE) {

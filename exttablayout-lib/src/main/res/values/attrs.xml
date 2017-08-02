@@ -59,6 +59,8 @@
         <attr name="tabPaddingBottom" format="dimension"/>
         <!-- The preferred padding along all edges of tabs. -->
         <attr name="tabPadding" format="dimension"/>
+        <!-- The text size to be applied to the currently selected tab. -->
+        <attr name="tabSelectedTextSize" format="dimension" />
     </declare-styleable>
 
     <declare-styleable name="TabItem">
