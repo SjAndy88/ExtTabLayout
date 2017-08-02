@@ -1568,7 +1568,7 @@ public class TabLayout extends HorizontalScrollView {
             // changed
             if (mTextView != null) {
                 mTextView.setSelected(selected);
-                mTextView.setTextSize(selected ? mTabSelectTextSize : mTabTextSize);
+                mTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, selected ? mTabSelectTextSize : mTabTextSize);
             }
             if (mIconView != null) {
                 mIconView.setSelected(selected);
