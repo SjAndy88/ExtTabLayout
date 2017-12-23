@@ -750,8 +750,8 @@ public class TabLayout extends HorizontalScrollView {
     /**
      * The one-stop shop for setting up this {@link TabLayout} with a {@link ViewPager}.
      * <p>
-     * <p>This is the same as calling {@link #setupWithViewPager(ViewPager, boolean)} with
-     * auto-refresh enabled.</p>
+     * <p>This is the same as calling {@link #setupWithViewPager(ViewPager, boolean, boolean)} with
+     * auto-refresh enabled, with smooth-scroll disable.</p>
      *
      * @param viewPager the ViewPager to link to, or {@code null} to clear any previous link
      */
@@ -773,6 +773,9 @@ public class TabLayout extends HorizontalScrollView {
      * <p>
      * <p>If {@code autoRefresh} is {@code true}, any changes in the {@link PagerAdapter} will
      * trigger this layout to re-populate itself from the adapter's titles.</p>
+     * <p>
+     * <p>If {@code smoothScroll} is {@code true}, {@link ViewPagerOnTabSelectedListener} will
+     * call setCurrentItem(tab.getPosition(), true);</p>
      * <p>
      * <p>If the given ViewPager is non-null, it needs to already have a
      * {@link PagerAdapter} set.</p>
@@ -870,7 +873,7 @@ public class TabLayout extends HorizontalScrollView {
             if (vp instanceof ViewPager) {
                 // If we have a ViewPager parent and we've been added as part of its decor, let's
                 // assume that we should automatically setup to display any titles
-                setupWithViewPager((ViewPager) vp, true, true);
+                setupWithViewPager((ViewPager) vp, true, true, false);
             }
         }
     }
