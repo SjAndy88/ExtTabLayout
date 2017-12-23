@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 
-public class CustomWidthActivity extends BaseActivity {
+public class CustomWidthWithSmoothScrollActivity extends BaseActivity {
 
 
     @BindView(R.id.home_tab_layout)
@@ -32,7 +32,7 @@ public class CustomWidthActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         HomePagerAdapter adapter = new HomePagerAdapter(getSupportFragmentManager(), getFragmentList(), getTitleList());
         mHomeViewPager.setAdapter(adapter);
-        mHomeTabLayout.setupWithViewPager(mHomeViewPager);
+        mHomeTabLayout.setupWithViewPager(mHomeViewPager, true);
     }
 
     private ArrayList<BaseFragment> getFragmentList() {

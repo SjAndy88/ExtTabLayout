@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 
-public class WithoutPaddingActivity extends BaseActivity {
+public class WithoutPaddingWithNoSmoothScrollActivity extends BaseActivity {
 
 
     @BindView(R.id.home_tab_layout)

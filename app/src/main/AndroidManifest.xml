@@ -17,9 +17,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".CustomWidthActivity" />
+        <activity android:name=".CustomWidthWithSmoothScrollActivity" />
 
-        <activity android:name=".WithoutPaddingActivity" />
+        <activity android:name=".WithoutPaddingWithNoSmoothScrollActivity" />
     </application>
 
 </manifest>

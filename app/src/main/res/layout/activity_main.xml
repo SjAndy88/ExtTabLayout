@@ -11,7 +11,7 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Custom Width"
+        android:text="Custom Width With SmoothScroll"
         android:textAllCaps="false"
         tools:layout_editor_absoluteX="135dp"
         tools:layout_editor_absoluteY="201dp" />
@@ -20,7 +20,7 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Without Padding"
+        android:text="Without Padding With No SmoothScroll"
         android:textAllCaps="false"
         tools:layout_editor_absoluteX="127dp"
         tools:layout_editor_absoluteY="301dp" />

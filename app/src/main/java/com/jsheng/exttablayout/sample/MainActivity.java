@@ -30,13 +30,13 @@ public class MainActivity extends BaseActivity {
         mCustomWidth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, CustomWidthActivity.class));
+                startActivity(new Intent(MainActivity.this, CustomWidthWithSmoothScrollActivity.class));
             }
         });
         mWithoutPadding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, WithoutPaddingActivity.class));
+                startActivity(new Intent(MainActivity.this, WithoutPaddingWithNoSmoothScrollActivity.class));
             }
         });
     }
