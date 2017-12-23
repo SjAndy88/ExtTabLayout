@@ -756,7 +756,11 @@ public class TabLayout extends HorizontalScrollView {
      * @param viewPager the ViewPager to link to, or {@code null} to clear any previous link
      */
     public void setupWithViewPager(@Nullable ViewPager viewPager) {
-        setupWithViewPager(viewPager, true);
+        setupWithViewPager(viewPager, true, false);
+    }
+
+    public void setupWithViewPager(@Nullable ViewPager viewPager, boolean smoothScroll) {
+        setupWithViewPager(viewPager, true, smoothScroll);
     }
 
     /**
@@ -777,12 +781,12 @@ public class TabLayout extends HorizontalScrollView {
      * @param autoRefresh whether this layout should refresh its contents if the given ViewPager's
      *                    content changes
      */
-    public void setupWithViewPager(@Nullable final ViewPager viewPager, boolean autoRefresh) {
-        setupWithViewPager(viewPager, autoRefresh, false);
+    public void setupWithViewPager(@Nullable final ViewPager viewPager, boolean autoRefresh, boolean smoothScroll) {
+        setupWithViewPager(viewPager, autoRefresh, false, smoothScroll);
     }
 
     private void setupWithViewPager(@Nullable final ViewPager viewPager, boolean autoRefresh,
-                                    boolean implicitSetup) {
+                                    boolean implicitSetup, boolean smoothScroll) {
         if (mViewPager != null) {
             // If we've already been setup with a ViewPager, remove us from it
             if (mPageChangeListener != null) {
@@ -810,7 +814,7 @@ public class TabLayout extends HorizontalScrollView {
             viewPager.addOnPageChangeListener(mPageChangeListener);
 
             // Now we'll add a tab selected listener to set ViewPager's current item
-            mCurrentVpSelectedListener = new ViewPagerOnTabSelectedListener(viewPager);
+            mCurrentVpSelectedListener = new ViewPagerOnTabSelectedListener(viewPager, smoothScroll);
             addOnTabSelectedListener(mCurrentVpSelectedListener);
 
             final PagerAdapter adapter = viewPager.getAdapter();
@@ -2226,14 +2230,20 @@ public class TabLayout extends HorizontalScrollView {
      */
     public static class ViewPagerOnTabSelectedListener implements TabLayout.OnTabSelectedListener {
         private final ViewPager mViewPager;
+        private final boolean mSmoothScroll;
 
         public ViewPagerOnTabSelectedListener(ViewPager viewPager) {
+            this(viewPager, false);
+        }
+
+        public ViewPagerOnTabSelectedListener(ViewPager viewPager, boolean smoothScroll) {
             mViewPager = viewPager;
+            mSmoothScroll = smoothScroll;
         }
 
         @Override
         public void onTabSelected(TabLayout.Tab tab) {
-            mViewPager.setCurrentItem(tab.getPosition());
+            mViewPager.setCurrentItem(tab.getPosition(), mSmoothScroll);
         }
 
         @Override
